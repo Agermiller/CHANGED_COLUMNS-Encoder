@@ -2,7 +2,7 @@
 A SQL query which mimics the behavior of the CHANGED_COLUMNS() function.
 
 ##Decoding CHANGED_COLUMNS()
-In an attempt to make sense of how to read the binary string produced by the CHANGED_COLUMNS() function, I discovered a post by Slava Murygin. He provided SQL which could be included within a trigger, which would output the column names that were updated in a specific table. You can find his post [here](http://slavasql.blogspot.com/2015/08/decoding-columnsupdated-function.html).
+In an attempt to make sense of how to read the binary string produced by the CHANGED_COLUMNS() function, I discovered a post by Slava Murygin. He provided SQL which could be included within a trigger, which would output the column names that were updated in a specific table. His post can be found [here](http://slavasql.blogspot.com/2015/08/decoding-columnsupdated-function.html).
 
 I've slightly modified his SQL to better fit my needs. The below query can take a specific binary string obtained from an audit table, and the name of the root table which uses the trigger with CHANGED_COLUMNS(). *Please keep in mind that the below SQL belongs to Slava. I am simply altering it and showing it here for reference.*
 
@@ -53,4 +53,4 @@ After seeing what the above SQL could do, I pondered how to create a query which
 ##Application
 This could be useful if a trigger was accidentally disabled. If one knew of a specific row in the table that was updated, could compare it to its former self, and gather a list of columns that were updated, then they should be able to use this query to generate a binary string which could be inserted in to an audit table. Though not an entirely practical script on a large scale, if a trigger did get disabled somehow then this could serve as a bandaid for an already unfortunate situation. 
 
-This solution would come with a few challenging requirements. For one, it would require that all of the columns in a table be diffed with a backed up snapshot of the table to obtain a list of updated columns per row. On top of that, you would only be able to get the latest updates, and any updates performed while the trigger was disabled would be unrecoverable. In the very least, one would be able to capture *something* in the audit table so that some degree of history could be logged during this outage.
+This solution would come with a few challenging requirements. For one, it would require that all of the columns in a table be diffed with a backed up snapshot of the table to obtain a list of updated columns per row. On top of that, one would only be able to get the latest updates, and any updates performed while the trigger was disabled would be unrecoverable. In the very least, one would be able to capture *something* in the audit table so that some degree of history could be logged during this outage.
