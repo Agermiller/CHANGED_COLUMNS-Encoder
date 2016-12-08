@@ -9,9 +9,9 @@ I've slightly modified his SQL to better fit my needs. The below query can take 
 ```SQL
 USE <database_name>
 
-/* Insert the binary coded list of changed columns, and the table which to search
-256 characters MAX. This is a random example for a table with 182 columns, thus I will 
-only be using ⌈182/4⌉ = 46 characters.*/
+/* Insert the binary coded list of changed columns, and the table which to search.
+256 characters MAX following the 0x. This is a random example for a table with 182 columns, thus I will 
+only be using ⌈182/4⌉ = 46 characters following the 0x.*/
 DECLARE @Changed_Columns BINARY(128) = 0x474940000000000000000000000000000000A0008E0002
 DECLARE @roottable VARCHAR(50) = '<enter_table_name>';
 

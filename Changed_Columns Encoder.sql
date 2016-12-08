@@ -16,9 +16,9 @@ DECLARE @counter TINYINT = 8
 DECLARE @two_nth SMALLINT = 1;
 DECLARE @byteTotal SMALLINT = 0;
 DECLARE @bytePiece BINARY(1);
-DECLARE @binOutput VARBINARY(127) = 0x;
+DECLARE @binOutput VARBINARY(128) = 0x;
 
-WHILE @totalBytes < 128 
+WHILE @totalBytes <= 128 
 BEGIN 
   WHILE @counter > 0
   BEGIN
